@@ -47,3 +47,10 @@ main tr {
     background-color: rgb(39, 38, 38);
     padding-top: 20px;
 }
+
+.alert {
+    position: absolute;
+    width: 40em;
+    top: 12em;
+    left: 45em;
+}
