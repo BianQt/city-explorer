@@ -1,6 +1,14 @@
 import React from "react";
 import axios from "axios";
-import { Form, Button, Row, Container, Col, Table } from "react-bootstrap";
+import {
+  Form,
+  Button,
+  Row,
+  Container,
+  Col,
+  Table,
+  Alert,
+} from "react-bootstrap";
 
 class Main extends React.Component {
   constructor(props) {
@@ -12,7 +20,9 @@ class Main extends React.Component {
       lon: "",
       imgUrl: "",
       displayName: "",
-      show:"hidden",
+      show: "hidden",
+      displayError: false,
+      errShow: "hidden",
     };
   }
   onChange = (e) => {
@@ -25,16 +35,24 @@ class Main extends React.Component {
     e.preventDefault();
     const apiKey = process.env.REACT_APP_LOCATION_API_KEY;
     const url = `https://us1.locationiq.com/v1/search.php?key=${apiKey}&city=${this.state.cityName}&format=json`;
-    const locationData = await axios.get(url);
-    const imgUrl = `https://maps.locationiq.com/v3/staticmap?key=${apiKey}&center=${locationData.data[0].lat},${locationData.data[0].lon}&zoom=16&size=450x300&markers=icon:large-red-cutout|${locationData.data[0].lat},${locationData.data[0].lon}`;
-    this.setState({
-      lat: locationData.data[0].lat,
-      lon: locationData.data[0].lon,
-      imgUrl: imgUrl,
-      displayName: locationData.data[0].display_name,
-      show:"visible"
-    });
-    console.log(new Date().getFullYear());
+    try {
+      const locationData = await axios.get(url);
+      const imgUrl = `https://maps.locationiq.com/v3/staticmap?key=${apiKey}&center=${locationData.data[0].lat},${locationData.data[0].lon}&zoom=14&size=450x300&markers=icon:large-red-cutout|${locationData.data[0].lat},${locationData.data[0].lon}`;
+      this.setState({
+        lat: locationData.data[0].lat,
+        lon: locationData.data[0].lon,
+        imgUrl: imgUrl,
+        displayName: locationData.data[0].display_name,
+        show: "visible",
+        errShow: "hidden",
+      });
+    } catch (e) {
+      console.log("Something went wrong.");
+      this.setState({
+        errShow: "visible",
+        show: "hidden",
+      });
+    }
   };
 
   render() {
@@ -61,8 +79,17 @@ class Main extends React.Component {
                 </Button>
               </Form>
             </Col>
-            <Col  md="6" style={{ visibility: this.state.show}}>
-        
+            <Col md="6" style={{ visibility: this.state.show }}>
+              <Alert className="alert"
+                style={{ visibility: this.state.errShow }}
+                variant="danger"
+                
+              >
+                <Alert.Heading>Oh snap! There is Nothing Found!</Alert.Heading>
+                <p>
+                  Please try again. Check the spelling & your internet connection.
+                </p>
+              </Alert>
               <Table striped bordered hover>
                 <tbody>
                   <tr>
