@@ -1,5 +1,6 @@
 main{
     margin: 70px 130px;
+    height: 600px;
   
 }
 
@@ -29,7 +30,7 @@ main{
     padding: 20px;
     border: 1px solid rgb(197, 197, 197);
     border-radius: 7px;
-    margin-bottom: 200px;
+    margin-bottom: 25px;
 }
 
 main tr {
