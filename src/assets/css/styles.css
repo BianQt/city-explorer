@@ -47,8 +47,9 @@ main tr {
     height: 70px;
     background-color: rgb(39, 38, 38);
     padding-top: 20px;
+    margin-top: 240px;
+    text-align: center;
 }
-
 .alert {
     position: absolute;
     width: 40em;
