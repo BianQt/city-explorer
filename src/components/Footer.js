@@ -5,9 +5,8 @@ class Footer extends React.Component {
   render() {
     return (
       <footer>
-        <Card className="text-center">
           <Card.Footer className="text-muted footer">©{new Date().getFullYear()} City Explorer</Card.Footer>
-        </Card>
+    
       </footer>
     );
   }
