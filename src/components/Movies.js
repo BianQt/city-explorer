@@ -3,7 +3,7 @@ import { Card, Row, Col } from "react-bootstrap";
 
 class Movies extends React.Component {
   render() {
-    console.log(this.props.moviesList);
+  
     return <div className="movies">
       <h2>Movies List!</h2>
       <Row xs={1} md={6} className="g-4">
