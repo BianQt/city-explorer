@@ -12,10 +12,10 @@ class Movies extends React.Component {
             <Card>
               <Card.Img
                 variant="top"
-                src={`https://image.tmdb.org/t/p/w500${element.poster_path}`}
+                src={`https://image.tmdb.org/t/p/w500${element.img}`}
               />
               <Card.Body>
-                <Card.Title>{element.original_title}</Card.Title>
+                <Card.Title>{element.tit}</Card.Title>
               </Card.Body>
             </Card>
           </Col>
